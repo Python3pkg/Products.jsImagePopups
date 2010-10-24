@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '2.0b3'
+version = '2.0b4'
 
 setup(name='Products.jsImagePopups',
       version=version,
@@ -21,7 +21,7 @@ setup(name='Products.jsImagePopups',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['Products'],
       include_package_data=True,
-      zip_safe=True,
+      zip_safe=False,
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
