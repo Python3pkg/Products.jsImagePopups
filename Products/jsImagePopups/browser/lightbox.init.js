@@ -7,7 +7,7 @@ jQuery(document).ready(function() {
       images.push(rel);
   });
   for(var i=0; i<images.length; i++)
-    jQuery('a[rel='+images[i]+']').lightBox(lightbox_settings);
+    jQuery('a[rel="'+images[i]+'"]').lightBox(lightbox_settings);
   
   jQuery('a[href*=image_view_fullscreen]').each(function() {
     var o = jQuery(this);
