@@ -1,23 +1,34 @@
-jQuery(document).ready(function() {
-  var images = [];
-  jQuery('a[rel^=lightbox]').each(function() {
-    var o = jQuery(this);
-    var rel = o.attr('rel');
-    if((rel.length == 8 || rel.indexOf('lightbox[') === 0) && jQuery.inArray(rel, images) == -1)
-      images.push(rel);
+(function($) {
+
+  function init(e) {
+    var container = $(this);
+    var images = [];
+    container.find('a[rel^=lightbox]').each(function() {
+      var o = $(this);
+      var rel = o.attr('rel');
+      if((rel.length == 8 || rel.indexOf('lightbox[') === 0) && $.inArray(rel, images) == -1)
+        images.push(rel);
+    });
+    for(var i=0; i<images.length; i++)
+      container.find('a[rel="'+images[i]+'"]').lightBox(lightbox_settings);
+
+    container.find('a[href*=image_view_fullscreen]').each(function() {
+      var o = $(this);
+      o.attr('href', o.attr('href').replace('image_view_fullscreen', 'image_preview'));
+      o.lightBox(lightbox_settings);
+    });
+    
+    container.find('.photoAlbumEntry a').each(function() {
+      var o = $(this);
+      o.attr('href', o.attr('href').replace('view', 'image_preview'));
+    });
+    container.find('.photoAlbumEntry a').lightBox(lightbox_settings);
+  }
+
+  $(document).ready(function(e) {
+    $.proxy(init, $('body'))(e);
+    $('.viewletmanager').on('viewlets.updated', init);
   });
-  for(var i=0; i<images.length; i++)
-    jQuery('a[rel="'+images[i]+'"]').lightBox(lightbox_settings);
-  
-  jQuery('a[href*=image_view_fullscreen]').each(function() {
-    var o = jQuery(this);
-    o.attr('href', o.attr('href').replace('image_view_fullscreen', 'image_preview'));
-    o.lightBox(lightbox_settings);
-  });
-  
-  jQuery('.photoAlbumEntry a').each(function() {
-    var o = jQuery(this);
-    o.attr('href', o.attr('href').replace('view', 'image_preview'));
-  });
-  jQuery('.photoAlbumEntry a').lightBox(lightbox_settings);
-});
+
+})(jQuery);
+
